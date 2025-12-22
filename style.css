@@ -1,0 +1,53 @@
+/* Custom animations */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.animate-blink { animation: blink 1s infinite; }
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* Subtle Pixel Decorations */
+.pixel-dot {
+    width: 4px;
+    height: 4px;
+    background-color: currentColor;
+    display: inline-block;
+    margin: 0 4px;
+    vertical-align: middle;
+}
+
+/* Tech Grid Background pattern - Simplified */
+.bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Custom Selection Colors */
+.selection-main::selection { background-color: #E0FF00; color: black; }
+.selection-sub::selection { background-color: #BD00FF; color: white; }
+
+/* Retro Colors Classes - Semantic Naming */
+.text-accent-main { color: #E0FF00; }
+.text-accent-sub { color: #BD00FF; }
+
+.border-accent-main { border-color: #E0FF00; }
+.border-accent-sub { border-color: #BD00FF; }
+
+.bg-accent-main { background-color: #E0FF00; }
+.bg-accent-sub { background-color: #BD00FF; }
+
+/* Stretched link to make whole card clickable */
+.stretched-link::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.minimal-card {
+    cursor: pointer;
+}

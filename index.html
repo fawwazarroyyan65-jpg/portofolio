@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Fawwaz</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        pixel: ['"Press Start 2P"', 'cursive'],
+                    },
+                    colors: {
+                        dark: '#121212', /* Deeper, cleaner dark */
+                        'dark-card': '#1e1e1e', /* Simple dark card */
+                        'accent-main': '#E0FF00', /* Volt Lime */
+                        'accent-sub': '#BD00FF',  /* Hot Magenta */
+                    },
+                    boxShadow: {
+                        'minimal': '0 4px 20px rgba(0, 0, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .minimal-card {
+            background: #1e1e1e;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .minimal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .minimal-card:hover::before {
+            opacity: 1;
+        }
+        .minimal-card:hover {
+            border-color: rgba(224, 255, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+        }
+        .skill-glow-html:hover { border-color: #E34F26; box-shadow: 0 0 20px rgba(227, 79, 38, 0.15); }
+        .skill-glow-css:hover { border-color: #1572B6; box-shadow: 0 0 20px rgba(21, 114, 182, 0.15); }
+        .skill-glow-tailwind:hover { border-color: #06B6D4; box-shadow: 0 0 20px rgba(6, 182, 212, 0.15); }
+        .skill-glow-python:hover { border-color: #3776AB; box-shadow: 0 0 20px rgba(55, 118, 171, 0.15); }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-dark text-gray-400 font-sans antialiased overflow-x-hidden selection:bg-accent-main selection:text-black relative">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-dark/90 backdrop-blur-sm border-b border-white/10 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 bg-accent-main rounded shadow-lg transition-all duration-300">
+                     <div class="bg-dark w-full h-full flex items-center justify-center rounded-sm">
+                        <span class="font-pixel text-accent-main font-bold text-sm">F</span>
+                     </div>
+                </div>
+                <span class="font-pixel text-sm md:text-base text-white tracking-widest">
+                    FAWWAZ
+                </span>
+            </a>
+            <ul class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                <li><a href="#home" class="nav-cyber-link hover:text-accent-main">BERANDA</a></li>
+                <li><a href="#about" class="nav-cyber-link hover:text-accent-sub">TENTANG</a></li>
+                <li><a href="#skills" class="nav-cyber-link hover:text-accent-main">KEAHLIAN</a></li>
+                <li><a href="#projects" class="nav-cyber-link hover:text-accent-sub">PROYEK</a></li>
+            </ul>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white font-pixel text-xl hover:text-accent-main transition-colors">≡</button>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-dark/95 z-40 transform translate-x-full transition-transform duration-300 md:hidden flex items-center justify-center">
+             <button id="close-menu-btn" class="absolute top-6 right-6 text-white font-pixel text-2xl">X</button>
+             <ul class="flex flex-col gap-8 text-xl font-medium text-center text-gray-400">
+                <li><a href="#home" class="mobile-link hover:text-accent-main transition-colors">BERANDA</a></li>
+                <li><a href="#about" class="mobile-link hover:text-accent-sub transition-colors">TENTANG</a></li>
+                <li><a href="#skills" class="mobile-link hover:text-accent-main transition-colors">KEAHLIAN</a></li>
+                <li><a href="#projects" class="mobile-link hover:text-accent-sub transition-colors">PROYEK</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <!-- Clean Background -->
+        <div id="hero-particles" class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+            <div class="absolute inset-0 bg-dark"></div>
+            <div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10" data-aos="fade-up" data-aos-duration="1000">
+            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-10">
+                <!-- Left Side: Text -->
+                <div class="w-full md:w-1/2 text-center md:text-left">
+                    <h1 class="font-pixel text-3xl md:text-5xl font-bold text-white leading-tight mb-6 uppercase">
+                        HALO SAYA FAWWAZ
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-400 mb-10 font-light tracking-wide">
+                        SAYA ADALAH SEORANG <span id="typing-text" class="text-accent-main font-medium">WEB DEVELOPER</span>
+                    </p>
+                    <div class="flex gap-4 justify-center md:justify-start">
+                        <a href="#contact" class="inline-block px-8 py-3 bg-white text-dark font-bold rounded hover:bg-accent-main transition-colors duration-300">
+                            HUBUNGI SAYA
+                        </a>
+                    </div>
+                </div>
+
+                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <div class="float-animation w-64 h-64 md:w-80 md:h-80 relative group">
+                        <div class="w-full h-full rounded-full bg-accent-main overflow-hidden border-4 border-white/10 shadow-[0_0_50px_rgba(224,255,0,0.3)] flex items-center justify-center">
+                            <img src="images/c43008a0-8072-472f-a2e5-7b2645425c91_removalai_preview.png" alt="Fawwaz" class="w-full h-full object-contain pt-8 group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block z-20">
+            <a href="#about" class="flex flex-col items-center gap-2 group">
+                <span class="text-[10px] font-pixel text-gray-500 group-hover:text-accent-main transition-colors">GULIR</span>
+                <svg class="w-6 h-6 text-gray-500 group-hover:text-accent-main transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative bg-dark">
+        <div class="container mx-auto px-6">
+                <h2 class="text-2xl font-bold mb-16 text-center text-white font-pixel" data-aos="fade-up">
+                    TENTANG<span class="text-accent-sub">_</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+                    <!-- Photo Placeholder -->
+                    <div class="minimal-card p-2 group" data-aos="fade-right">
+                        <div class="bg-dark rounded-lg h-80 flex items-center justify-center overflow-hidden relative border border-white/5">
+                            <img src="images/Gambar WhatsApp 2025-12-22 pukul 09.23.44_08ede0e3.jpg" alt="Fawwaz" class="w-full h-full object-cover p-1 group-hover:scale-105 transition-all duration-500">
+                        </div>
+                    </div>
+
+                    <!-- Text Content -->
+                    <div data-aos="fade-left">
+                        <h3 class="text-xl font-bold text-white mb-6">Berkarya. Mengembangkan. <span class="text-accent-main">Berinovasi.</span></h3>
+                        <p class="text-gray-400 leading-relaxed font-light mb-6">
+                            Halo! Saya Fawwaz, saya warga negara indonesia saya lahir di bekasi pada 23 juni 2010.
+                        </p>
+                        <p class="text-gray-400 leading-relaxed font-light mb-8">
+                        saya seorang pengembang web front-end ,dan saya telah mempelajari python ,html 5 dan css 3 .dan saya menggunakan vs-code untuk tempat saya Berkarya.
+                        </p>
+                        
+                        
+                        <!-- Removed available for freelance status -->
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-[#202020]">
+        <div class="container mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-16 text-center text-white font-pixel" data-aos="fade-up">
+                KEAHLIAN<span class="text-accent-main">_</span>
+            </h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 max-w-4xl mx-auto" data-aos="fade-up">
+                <!-- HTML5 -->
+                <div class="minimal-card skill-glow-html p-8 flex flex-col items-center justify-center group transition-all duration-300">
+                    <img src="https://skillicons.dev/icons?i=html" alt="HTML5" class="h-16 w-16 mb-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <span class="text-xs font-bold text-gray-500 group-hover:text-white tracking-widest transition-colors uppercase relative z-10">HTML5</span>
+                </div>
+                <!-- CSS3 -->
+                <div class="minimal-card skill-glow-css p-8 flex flex-col items-center justify-center group transition-all duration-300">
+                    <img src="https://skillicons.dev/icons?i=css" alt="CSS3" class="h-16 w-16 mb-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white tracking-widest transition-colors uppercase relative z-10">CSS3</span>
+                </div>
+                <!-- Tailwind CSS -->
+                <div class="minimal-card skill-glow-tailwind p-8 flex flex-col items-center justify-center group transition-all duration-300">
+                    <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind CSS" class="h-16 w-16 mb-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white tracking-widest transition-colors uppercase relative z-10">Tailwind</span>
+                </div>
+                <!-- Python -->
+                <div class="minimal-card skill-glow-python p-8 flex flex-col items-center justify-center group transition-all duration-300">
+                    <img src="https://skillicons.dev/icons?i=python" alt="Python" class="h-16 w-16 mb-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white tracking-widest transition-colors uppercase relative z-10">Python</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-dark">
+        <div class="container mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-16 text-center text-white font-pixel" data-aos="fade-up">
+                PROYEK<span class="text-accent-sub">_</span>
+            </h2>
+            
+            <div class="space-y-24">
+                <!-- Kategori: TAHFIDZ -->
+                <section data-aos="fade-up">
+                    <div class="flex items-center gap-4 mb-12">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-accent-main/20"></div>
+                        <h3 class="font-pixel text-lg text-accent-main">TAHFIDZ</h3>
+                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-accent-main/20"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-3xl mx-auto">
+                        <!-- Tasmi' Qur'an -->
+                        <div class="minimal-card overflow-hidden group">
+                            <div class="h-64 bg-[#2a2a2a] relative overflow-hidden">
+                                 <img src="images/download (3).jpeg" alt="Tasmi Quran" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                                 <div class="absolute inset-0 bg-accent-main opacity-10 group-hover:opacity-0 transition-opacity"></div>
+                            </div>
+                            <div class="p-8 text-center">
+                                <h4 class="text-xl font-bold text-white mb-4">Tasmi' Qur'an Juz 30</h4>
+                                <p class="text-gray-400 text-sm mb-8 leading-relaxed">
+                                vidio tasmi' al-qura'n juz 30 
+                                </p>
+                                <div class="flex justify-center">
+                                    <a href="https://drive.google.com/drive/folders/1B3YTeVKCXC9a6fzulEODrVqj_VirUbf6" target="_blank" class="stretched-link text-xs font-bold text-accent-main hover:text-white transition-colors flex items-center gap-2 uppercase tracking-widest">
+                                        LIHAT SERTIFIKASI <span class="text-lg">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-white/5 my-16 max-w-4xl mx-auto">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Poster -->
+                        <div class="minimal-card overflow-hidden group">
+                            <div class="h-48 bg-[#2a2a2a] relative overflow-hidden">
+                                 <img src="images/tahajji_premium.png" alt="Poster Pendidikan" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                            </div>
+                            <div class="p-8">
+                                <h4 class="text-lg font-bold text-white mb-3">Poster Pendidikan</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed">
+                                    poster tentang kitab metode tahajji qaedah samiriyyah
+                                </p>
+                                <a href="https://drive.google.com/drive/folders/1MbXNFi7LNgk1pK0O80TMLf7sELFi2Ggu?usp=sharing" target="_blank" class="stretched-link text-[10px] font-bold text-white/50 hover:text-accent-main transition-colors flex items-center gap-2 uppercase tracking-widest">
+                                    LIHAT POSTER <span class="text-lg">→</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Tahajji Qur'an -->
+                        <div class="minimal-card overflow-hidden group">
+                            <div class="h-48 bg-[#2a2a2a] relative overflow-hidden">
+                                 <img src="images/tahajji_premium.png" alt="Tahajji Quran" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                            </div>
+                            <div class="p-8">
+                                <h4 class="text-lg font-bold text-white mb-3">Tahajji Qur'an</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed">
+                                vidio tahajji surah al-fatihah
+                                </p>
+                                <a href="https://youtu.be/c9hSC1JwGmI?si=Nk3zPm0bwCMksXDv" target="_blank" class="stretched-link text-[10px] font-bold text-white/50 hover:text-accent-main transition-colors flex items-center gap-2 uppercase tracking-widest">
+                                    TONTON DEMO <span class="text-lg">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="border-white/5 my-24">
+
+                <!-- Kategori: LEARN ARABIC -->
+                <section data-aos="fade-up">
+                    <div class="flex items-center gap-4 mb-12">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-accent-sub/20"></div>
+                        <h3 class="font-pixel text-lg text-accent-sub">LEARN ARABIC</h3>
+                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-accent-sub/20"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Item 1: Daily Vlog -->
+                        <div class="minimal-card overflow-hidden group">
+                            <img src="images/gayshel.jpeg" alt="Daily Vlog" class="h-40 w-full object-cover">
+                            <div class="p-8">
+                                <h4 class="text-lg font-bold text-white mb-3 group-hover:text-accent-sub transition-colors">DAILY VLOG</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed">
+                                    Vlog kehidupan sehari-hari yang disajikan sepenuhnya dalam Bahasa Arab untuk melatih kelancaran berbicara dan kosakata.
+                                </p>
+                                <a href="https://youtube.com/shorts/lD2CAFegoU0?si=HAwqY40TGB3VcHh_" target="_blank" class="stretched-link text-[10px] font-bold text-accent-sub hover:text-white transition-colors uppercase tracking-widest">
+                                    TONTON VLOG →
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Item 2: Parents Vlog -->
+                        <div class="minimal-card overflow-hidden group">
+                            <img src="images/download (7).jpeg" alt="Parents Vlog" class="h-40 w-full object-cover">
+                            <div class="p-8">
+                                <h4 class="text-lg font-bold text-white mb-3 group-hover:text-accent-sub transition-colors">PARENTS VLOG</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed">
+                                    Vlog tematik tentang bakti kepada orang tua menggunakan bahasa Arab yang menyentuh.
+                                </p>
+                                <a href="https://youtu.be/qrlDsqMrQw4?si=Tihe4lFtmTAyDHsY" target="_blank" class="stretched-link text-[10px] font-bold text-accent-sub hover:text-white transition-colors uppercase tracking-widest">
+                                    TONTON VLOG →
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Item 3: Conversation -->
+                        <div class="minimal-card overflow-hidden group">
+                            <img src="images/download (8).jpeg" alt="Hiwar Interaktif" class="h-40 w-full object-cover">
+                            <div class="p-8">
+                                <h4 class="text-lg font-bold text-white mb-3 group-hover:text-accent-sub transition-colors">HIWAR INTERAKTIF</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed">
+                                    Video percakapan (Hiwar) dalam Bahasa Arab, menunjukkan kemahiran komunikatif dalam berbagai skenario sosial.
+                                </p>
+                                <a href="https://youtu.be/lttgh-Z1zBg?si=jm5F2VrEzTamUvpd" target="_blank" class="stretched-link text-[10px] font-bold text-accent-sub hover:text-white transition-colors uppercase tracking-widest">
+                                    TONTON VIDEO →
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Item 4: Hadith -->
+                        <div class="minimal-card overflow-hidden group">
+                            <img src="images/download (5).jpeg" alt="Syarah Hadits" class="h-40 w-full object-cover">
+                            <div class="p-8">
+                                <h4 class="text-lg font-bold text-white mb-3 group-hover:text-accent-sub transition-colors">SYARAH HADITS</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed">
+                                    Penjelasan video (Syarah) Hadits dalam Bahasa Arab untuk memperdalam pemahaman agama sekaligus menguasai penyampaian formal.
+                                </p>
+                                <a href="https://youtube.com/shorts/lD2CAFegoU0?si=bcWIJT76DY2GnG_o" target="_blank" class="stretched-link text-[10px] font-bold text-accent-sub hover:text-white transition-colors uppercase tracking-widest">
+                                    TONTON VIDEO →
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Item 5: Arabic Literacy -->
+                        <div class="minimal-card overflow-hidden group">
+                            <img src="images/Kitab kuning 📜📈📌.jpeg" alt="Literasi Arab" class="h-40 w-full object-cover">
+                            <div class="p-8">
+                                <h4 class="text-lg font-bold text-white mb-3 group-hover:text-accent-sub transition-colors">LITERASI ARAB</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed">
+                                    Analisis video dan pembacaan teks Arab gundul untuk menunjukkan penguasaan aturan tata bahasa Nahwu dan Sharf.
+                                </p>
+                                <a href="https://youtu.be/g2pa01-GX8I?si=zMV5thKzHxHt-9eu" target="_blank" class="stretched-link text-[10px] font-bold text-accent-sub hover:text-white transition-colors uppercase tracking-widest">
+                                    TONTON VIDEO →
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Item 6: Reflections -->
+                        <div class="minimal-card overflow-hidden group">
+                            <img src="images/download (6).jpeg" alt="Intensif Arab" class="h-40 w-full object-cover">
+                            <div class="p-8">
+                                <h4 class="text-lg font-bold text-white mb-3 group-hover:text-accent-sub transition-colors">INTENSIF ARAB</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed">
+                                    Refleksi tertulis dan pengalaman berharga dari partisipasi dalam program intensif Daurah Bahasa Arab.
+                                </p>
+                                <a href="https://drive.google.com/drive/folders/10IaXQqsWsvFww04cWgYWtu2i8lQMYcR1?usp=drive_link" target="_blank" class="stretched-link text-[10px] font-bold text-accent-sub hover:text-white transition-colors uppercase tracking-widest">
+                                    BACA CERITA →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="border-white/5 my-24">
+
+                <!-- Kategori: IT SOLUTIONS -->
+                <section data-aos="fade-up">
+                    <div class="flex items-center gap-4 mb-12">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-accent-main/20"></div>
+                        <h3 class="font-pixel text-lg text-accent-main">IT SOLUTIONS</h3>
+                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-accent-main/20"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Python API -->
+                        <div class="minimal-card overflow-hidden group flex flex-col">
+                            <div class="h-48 overflow-hidden">
+                                <img src="images/Using Tuples in Python_ Python is a programming language that… _ by Yancy Dennis _ Mar, 2022.jpeg" alt="Python API" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+                            <div class="p-8 flex-1 flex flex-col">
+                                <h4 class="text-lg font-bold text-white mb-3 group-hover:text-accent-main transition-colors">PYTHON API & AUTOMATION</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed flex-1">
+                                    aplikasi tentang jadwal sholat sesuai denagn kota dan tanggal dalam output terminal menggunakan api aladhan
+                                </p>
+                                <div class="flex items-center justify-between mt-auto">
+                                    <div class="flex gap-2">
+                                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] text-accent-main border border-white/10">Python</span>
+                                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] text-accent-main border border-white/10">API</span>
+                                    </div>
+                                    <a href="https://github.com/fawwazarroyyan65-jpg/tugas-python-api-aladhan" target="_blank" class="stretched-link text-[10px] font-pixel text-white hover:text-accent-main transition-colors">GITHUB →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Web Slicing -->
+                        <div class="minimal-card overflow-hidden group flex flex-col">
+                            <div class="h-48 overflow-hidden">
+                                <img src="images/image.png" alt="Web Slicing" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+                            <div class="p-8 flex-1 flex flex-col">
+                                <h4 class="text-lg font-bold text-white mb-3 group-hover:text-accent-main transition-colors">WEB SLICING</h4>
+                                <p class="text-gray-400 text-xs mb-6 leading-relaxed flex-1">
+                                menyalin layout web sicepat dengan mengunakan tailwindcss
+                                </p>
+                                <div class="flex items-center justify-between mt-auto">
+                                    <div class="flex gap-2">
+                                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] text-accent-main border border-white/10">Tailwind</span>
+                                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] text-accent-main border border-white/10">HTML/JS</span>
+                                    </div>
+                                    <a href="http://fawwazarroyyan65-jpg.github.io/slaicing-web-sicepat/index.html" target="_blank" class="stretched-link text-[10px] font-pixel text-white hover:text-accent-main transition-colors">DEMO →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-white/5 relative z-20 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="space-y-4">
+                     <div class="opacity-80 hover:opacity-100 transition-opacity">
+                        <span class="font-pixel text-xl text-white">FAWWAZ<span class="text-accent-main">.</span>DEV</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Menciptakan pengalaman digital yang sempurna dengan fokus pada performa dan estetika.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-pixel text-white text-sm mb-6">TAUTAN</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-accent-main transition-colors">Beranda</a></li>
+                        <li><a href="#about" class="hover:text-accent-main transition-colors">Tentang</a></li>
+                        <li><a href="#skills" class="hover:text-accent-main transition-colors">Keahlian</a></li>
+                        <li><a href="#projects" class="hover:text-accent-main transition-colors">Proyek</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-pixel text-white text-sm mb-6">LAYANAN</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="hover:text-accent-sub transition-colors cursor-default">Web Development</li>
+                        <li class="hover:text-accent-sub transition-colors cursor-default">Python Scripting</li>
+                        <li class="hover:text-accent-sub transition-colors cursor-default">UI/UX Design</li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                   <h4 class="font-pixel text-white text-sm mb-6">HUBUNGI</h4>
+                   <div class="space-y-3 text-sm text-gray-400">
+                        <p class="flex items-center gap-2">
+                             <span class="text-accent-main">📍</span> Indonesia
+                        </p>
+                        <a href="mailto:contact@fawwaz.dev" class="flex items-center gap-2 hover:text-white transition-colors">
+                             <span class="text-accent-main">✉️</span> contact@fawwaz.dev
+                        </a>
+                   </div>
+                   <!-- Social Icons -->
+                   <div class="flex space-x-4 mt-6">
+                        <!-- Instagram -->
+                        <a href="#" class="text-gray-400 hover:text-accent-main transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <!-- GitHub -->
+                        <a href="#" class="text-gray-400 hover:text-accent-main transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="#" class="text-gray-400 hover:text-accent-main transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                   </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/5 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center">
+                 <p class="text-gray-600 text-sm font-pixel mb-4 md:mb-0">© 2025 FAWWAZ. Hak cipta dilindungi.</p>
+                 <p class="text-gray-600 text-xs">Dibuat dengan <span class="text-red-500">♥</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
